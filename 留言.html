@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>留言板</title>
+
+    <style>
+
+        html,body,div,ul,li,span,input{
+            margin: 0;
+            padding: 0;
+        }
+
+        ul,li{
+            list-style: none;
+        }
+
+        #bg{
+
+            width: 700px;
+            height: 400px;
+            border: 1px solid purple;
+            margin: 100px auto;
+        }
+
+        .content{
+            width: 100%;
+            height: 350px;
+            overflow-y: auto;
+        }
+
+        .tap input{
+            float: left;
+            box-sizing: border-box;
+        }
+
+        .tap input:first-of-type{
+            width: 600px;
+            height: 50px;
+            border: 1px solid darkgreen;
+        }
+
+        .clear input,.tap input:last-of-type{
+            width: 100px;
+            height: 50px;
+            font-size: 20px;
+            color: #fff;
+            background-color: darkgreen;
+            border: 1px solid darkgreen;
+        }
+
+        .con{
+            /*margin-top: 50px;*/
+        }
+
+        .con li{
+            border: 1px solid gainsboro;
+            height: 50px;
+            line-height: 50px;
+        }
+
+        .con li{
+            position: relative;
+        }
+
+        .con li button{
+            position: absolute;
+            right: 10px;
+            top: 5px;
+            width: 100px;
+            height: 40px;
+            font-size: 25px;
+            color: #fff;
+            background-color: red;
+            border: 1px solid red;
+        }
+
+        .con li span:last-of-type{
+            margin-left: 10px;
+            color: blue;
+        }
+
+    </style>
+
+</head>
+<body>
+
+
+    <div id="bg">
+        <div class="tap">
+            <input type="text">
+            <input type="button" value="提 交" onclick=save()>
+        </div>
+
+        <div class="content">
+            <div class="con">
+                <ul>
+                </ul>
+            </div>
+            <div class="clear">
+                <input type="button" value="清空所有" onclick = clearAll()>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+
+        var input = document.querySelector("input[type = text]");
+
+        var ul = document.querySelector("ul");
+
+        function save() {
+
+            if (window.localStorage){
+
+                if (input.value != ""){
+
+                    //length 获取 localStorage 里存储内容的数量
+//                    var length = window.localStorage.length;
+
+                    var obj = {
+                        value : input.value,
+                        date  : (new Date()).toLocaleString()
+
+                    }
+
+                    window.localStorage.setItem(obj.date,JSON.stringify(obj));
+
+                    ul.appendChild(addMessage(obj));
+
+                    input.value = "";
+                }
+
+            }
+        }
+
+        function addMessage(obj) {
+
+            var li = document.createElement("li");
+
+            li._index = obj.date;
+
+            var str = "";
+
+            str += "<span>" + obj.value + "</span>";
+
+            str +=  "<span>" + obj.date + "</span>";
+
+            str += "<button>" + "删除" + "</button>";
+
+            li.innerHTML = str;
+
+            return li;
+        }
+        
+        readStorage();
+
+        function readStorage() {
+
+
+            if(window.localStorage){
+
+                //文档碎片
+                var frg = document.createDocumentFragment();
+
+
+                for (var key in window.localStorage){
+
+                    var obj = JSON.parse(window.localStorage.getItem(key));
+                    frg.appendChild(addMessage(obj));
+                }
+
+
+                ul.appendChild(frg);
+
+            }else {
+
+                alert("没有存储内容");
+            }
+
+        }
+
+        function clearAll() {
+
+            //clear 清除所有
+            window.localStorage.clear();
+
+            ul.innerHTML = "";
+
+        }
+
+
+
+        //事件委托代理
+        ul.addEventListener("click",function (e) {
+
+            if (e.target.nodeName == "BUTTON"){
+
+                ul.removeChild(e.target.parentNode);
+
+                window.localStorage.removeItem(e.target.parentNode._index);
+
+            }
+
+        })
+
+
+    </script>
+
+
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>选项卡</title>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		body{
+			font-size: 12px;
+			padding: 200px;
+		}
+		ul{
+			list-style-type: none;
+		}
+		.box ul {
+			height: 30px;
+			line-height: 30px
+		}
+		.box ul li{
+			float: left;
+			padding: 0 10px;
+			border: 1px solid #F05E1C;
+			margin-right: 1px;
+			border-bottom: none;
+			position: relative;
+			cursor: pointer;
+		}
+		.box ul li.two{
+			background: #F05E1C;
+			color: #fff;
+		}
+		.content{
+			width: 300px;
+			height: auto;
+			border: 1px solid #F05E1C;
+			padding:10px;
+		}
+		.box ul li.one {
+			background: #F05E1C;
+		}
+	</style>
+	<script type="text/javascript" src="jquery.js"></script>
+		
+	</script>
+</head>
+<body>
+	<div class="box">
+		<ul>
+			<li class="one">国内新闻</li>
+			<li>国外新闻</li>
+			<li>本地新闻</li>
+		</ul>
+		<div class="content">
+			<div class="content1">童话大王郑渊洁在作家榜里持续上榜而且名列前茅，让很多人误以为这仅仅是一种“情怀”。作家榜品牌创始人吴怀尧 （微博）表示，郑渊洁能够在过去的30年里受到众多读者的喜爱，不仅在于作品中天马行空的想象，更在于他对读者的真诚。</div>
+			<div class="content1">山东一财政局局长，在女儿上高中，继女上初中的时候，安排两人进地税局“工作“，并且领了10年工资、补助，甚至还有住房公积金。地税局领导拒绝让俩孩子吃空饷时，他就让下属缓发、减发经费导致地税局仨月开不出工资，并以此为要挟，直到对方同意给她的两个女儿发工资为止。</div>
+			<div class="content1">半岛局势风起云涌，好不热闹，岛叔刚刚推送了朝核问题文章，分析各方介入之下，半岛能否迎来转机。</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+	$('.content1:gt(0)').hide();
+		var wl = $('.box ul li');
+		wl.hover(function() {
+			$(this).addClass('two').siblings().removeClass('two');
+		});
+		wl.click(function() {
+			$(this).addClass('one')
+				.siblings().removeClass();
+				var wl_index = wl.index(this);
+				$('.content1').eq(wl.index(this)).show().siblings().hide();
+		});
+</script>
+</html>

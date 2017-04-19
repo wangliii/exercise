@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>xy坐标</title>
+	<meta charset="utf-8">
+	<script type="text/javascript" src="jquery.js"></script>
+</head>
+<body>
+	<div id="log"></div>
+</body>
+	<script type="text/javascript">
+		$(document).bind('mousemove', function(e) {
+			$("#log").text("X坐标轴为:" + e.pageX + "，Y坐标轴为:" + e.pageY);
+		});
+	</script>
+</html>

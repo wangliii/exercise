@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>changeImage</title>
+	<style type="text/css">
+		body{
+			font-family: "Helvetica","Arial",serif;
+			color: #333;
+			background-color: #ccc;
+			margin: 1em 10%;
+		}
+		h1{
+			color: #333;
+			background-color: transparent;
+		}
+		a{
+			color: #c60;
+			background-color: transparent;
+			font-weight: bold;
+			text-decoration: none;
+		}
+		ul{
+			padding: 0;
+
+		}
+		li{
+			float: left;
+			padding: 1em;
+			list-style-type: none;
+		}
+		img{
+			display: block;
+			clear: both;
+		}
+		p{
+			width: 900px;
+			text-align: center;
+		}
+	</style>
+		<script type="text/javascript">
+			function showImage(pic) {
+			  var source = pic.getAttribute("href");
+			  var placeholder = document.getElementById("placeholder");
+			  placeholder.setAttribute("src",source);
+			  var text = pic.getAttribute("title");
+			  var description = document.getElementById("description");
+			  description.firstChild.nodeValue = text;
+		}
+		</script>
+</head>
+<body>
+	<h1>change image (图片来自于网络，如有冒犯，请联系本人)</h1>
+	<ul>
+		<li>
+			<a href="image/1.png" title="天津文博馆" onclick="showImage(this); return false;">天津文博馆</a>
+		</li>
+		<li>
+			<a href="image/2.png" title="天津社教馆" onclick="showImage(this); return false;">天津社教馆</a>
+		</li>
+		<li>
+			<a href="image/3.png" title="天津美术馆" onclick="showImage(this); return false;">天津美术馆</a>
+		</li>
+		<li>
+			<a href="image/4.png" title="天津博览馆" onclick="showImage(this); return false;">天津博览馆</a>
+		</li>
+	</ul>
+	<img id="placeholder" src="image/placeholder.png" alt="placeholder image"/>
+	<p id="description">image name</p>
+</body>
+</html>
